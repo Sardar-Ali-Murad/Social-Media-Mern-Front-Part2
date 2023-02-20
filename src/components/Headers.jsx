@@ -26,10 +26,11 @@ const Headers = () => {
       <div className='headersPart1'>
         <Link to="/">
       <h4>ZolloPedia</h4>
+
         </Link>
       {/* <TextField
                 fullWidth
-      
+                
                 focused={!light?true:false}
                 id="standard-bare"
                 variant="outlined"
@@ -37,16 +38,17 @@ const Headers = () => {
                 InputProps={{
                   endAdornment: (
                     // <IconButton>
-                      <SearchIcon />
+                    <SearchIcon />
                     // </IconButton>
-                  ),
-                }}
+                    ),
+                  }}
               /> */}
       </div>
+        <AiOutlineLogout className='headersIcons smallLogout' onClick={logout}/>
 
       <div className='headersPart2' >
         {
-         light?
+          light?
           <BsFillMoonFill className='headersIcons' onClick={()=>dispatch(changeLight())}/>:
           <CiDark className='headersIcons' onClick={()=>dispatch(changeLight())}/>
         }
