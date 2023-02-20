@@ -139,10 +139,10 @@ const userSlice=createSlice({
         [uploadImage.pending]:(state)=>{
           state.isLoading=true
         },
-        // [uploadImage.rejected]:(state,props)=>{
-        //   console.log(props)
-        //   state.isLoading=false
-        // },
+        [uploadImage.rejected]:(state,props)=>{
+          console.log(props)
+          state.isLoading=false
+        },
         [getPosts.fulfilled]:(state,{payload})=>{
           state.Posts=payload.Posts
           state.isLoading=false
