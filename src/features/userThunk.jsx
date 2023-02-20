@@ -11,7 +11,7 @@ let BACK_URL="https://social-media-back.vercel.app/"
 export const setupUserLogin = async (data, route, thunkAPI) => {
   try {
     let props = await axios.post(
-      `http://localhost:5000/api/v1/auth/${route}`,
+      `https://social-media-back.vercel.app/api/v1/auth/${route}`,
       data
     );
     return props.data;
