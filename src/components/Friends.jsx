@@ -16,16 +16,16 @@ const Friends = () => {
     <Card style={{padding:"10px",marginTop:"20px",background:!light?"black":"",color:!light?"white":"",border:!light?"2px solid white":""}} className="friendsMain singleCard">
         <h4>Friends</h4>
      {
-        user.friends.map((friend)=>{
+        user?.friends?.map((friend)=>{
                 return  <div className='postFront'>
                 <div className='flexBox'>
                 <Link to={`/user/${friend._id}`}>
                 <Avatar sx={{ bgcolor: deepOrange[500] }} style={{cursor:"pointer"}}>
-                  {friend.firstName.slice(0, 1)[0]}
+                  {friend?.firstName?.slice(0, 1)[0]}
                 </Avatar>
                   </Link>
                 <div>
-                    <h4>{friend.firstName}</h4>
+                    <h4>{friend?.firstName}</h4>
                 </div>
                 {
                     <FaPeopleArrows className='peopleIcon icons' onClick={()=>dispatch(userUpdate(friend._id))}/>

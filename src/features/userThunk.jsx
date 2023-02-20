@@ -1,10 +1,16 @@
 import axios from "axios";
 import { getPosts, currentUser, singleUser } from "./userSlice";
 
+// After Deployment
+let BACK_URL="https://social-media-back.vercel.app/"
+
+// Before Deployment
+// let BACK_URL="https://social-media-back.vercel.app"
+
 export const setupUserLogin = async (data, route, thunkAPI) => {
   try {
     let props = await axios.post(
-      `http://localhost:5000/api/v1/auth/${route}`,
+      `https://social-media-back.vercel.app/api/v1/auth/${route}`,
       data
     );
     return props.data;
@@ -16,7 +22,7 @@ export const setupUserLogin = async (data, route, thunkAPI) => {
 export const setupUserRegister = async (data, route, thunkAPI) => {
   try {
     let props = await axios.post(
-      `http://localhost:5000/api/v1/auth/${route}`,
+      `https://social-media-back.vercel.app/api/v1/auth/${route}`,
       data
     );
     return props.data;
@@ -33,13 +39,12 @@ export const postImage = async (event, thunkAPI) => {
 
   try {
     const props = await axios.post(
-      `http://localhost:5000/api/v1/post/uploadImage`,
+      `https://social-media-back.vercel.app/api/v1/post/uploadImage`,
       formData,
       {
         headers: {
           "Content-Type": "multipart/form-data",
           authorization: `Bearer ${token}`,
-
         },
       }
     );
@@ -52,7 +57,7 @@ export const postImage = async (event, thunkAPI) => {
 export const getAllPosts = async (_, thunkAPI) => {
   let token = thunkAPI.getState().store.token;
   try {
-    let props = await axios.get(`http://localhost:5000/api/v1/post`, {
+    let props = await axios.get(`https://social-media-back.vercel.app/api/v1/post`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -67,7 +72,7 @@ export const getCurrentUser = async (_, thunkAPI) => {
   let token = thunkAPI.getState().store.token;
   try {
     let props = await axios.get(
-      `http://localhost:5000/api/v1/auth/getCurrentUser`,
+      `https://social-media-back.vercel.app/api/v1/auth/getCurrentUser`,
       {
         headers: {
           authorization: `Bearer ${token}`,
@@ -84,7 +89,7 @@ export const getSingleUser = async (id, thunkAPI) => {
   let token = thunkAPI.getState().store.token;
   try {
     let props = await axios.get(
-      `http://localhost:5000/api/v1/auth/getSingleUser/${id}`,
+      `https://social-media-back.vercel.app/api/v1/auth/getSingleUser/${id}`,
       {
         headers: {
           authorization: `Bearer ${token}`,
@@ -101,7 +106,7 @@ export const updateUser = async (friendId, thunkAPI) => {
   let token = thunkAPI.getState().store.token;
   try {
     let props = await axios.patch(
-      `http://localhost:5000/api/v1/auth/updateUser`,
+      `https://social-media-back.vercel.app/api/v1/auth/updateUser`,
       { friendId },
       {
         headers: {
@@ -122,7 +127,7 @@ export const createComment = async (postId, comment, thunkAPI) => {
   let token = thunkAPI.getState().store.token;
   try {
     let props = await axios.post(
-      `http://localhost:5000/api/v1/comment/${postId}`,
+      `https://social-media-back.vercel.app/api/v1/comment/${postId}`,
       { comment: comment },
       {
         headers: {
@@ -143,7 +148,7 @@ export const uploadPost = async (title, thunkAPI) => {
   let image = thunkAPI.getState().store.postImage;
   try {
     let props = await axios.post(
-      `http://localhost:5000/api/v1/post`,
+      `https://social-media-back.vercel.app/api/v1/post`,
       { title, image },
       {
         headers: {
@@ -162,7 +167,7 @@ export const heartResponse = async (postId, thunkAPI) => {
   let token = thunkAPI.getState().store.token;
   try {
     let props = await axios.get(
-      `http://localhost:5000/api/v1/post/like/${postId}`,
+      `https://social-media-back.vercel.app/api/v1/post/like/${postId}`,
       {
         headers: {
           authorization: `Bearer ${token}`,
