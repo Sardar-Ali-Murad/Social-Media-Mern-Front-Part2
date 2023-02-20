@@ -10,12 +10,17 @@ import { Link } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import {changeLight}  from "../features/userSlice"
 import {CiDark}  from "react-icons/ci"
+import {AiOutlineLogout}  from "react-icons/ai"
+import {logoutUser}  from "../features/userSlice"
 const Headers = () => {
   let dispatch=useDispatch()
   let {light}=useSelector((state)=>state.store)
- 
 
-    
+    function logout(){
+      dispatch(logoutUser())
+      localStorage.removeItem("user")
+  localStorage.removeItem("token")
+    }
   return (
     <div className='headersMain' style={{background:!light?"black":"",color:!light?"white":"",boxShadow:!light?"2px 2px 2px white":""}}>
       <div className='headersPart1'>
@@ -47,7 +52,8 @@ const Headers = () => {
         }
         <TfiComments  className='headersIcons'/>
         <IoIosNotificationsOutline  className='headersIcons'/>
-        <AiOutlineQuestionCircle  className='headersIcons'/>
+        {/* <AiOutlineQuestionCircle  className='headersIcons'/> */}
+        <AiOutlineLogout className='headersIcons' onClick={logout}/>
       </div>
         
     </div>

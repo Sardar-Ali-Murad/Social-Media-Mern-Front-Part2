@@ -92,6 +92,10 @@ const userSlice=createSlice({
        changeLight:(state)=>{
           state.light=!state.light
           addLightToLocalStorage(state.light)
+       },
+       logout:(state)=>{
+        state.user=""
+        state.token=""
        }
     },
     extraReducers:{
