@@ -20,7 +20,7 @@ const Headers = () => {
     <div className='headersMain' style={{background:!light?"black":"",color:!light?"white":"",boxShadow:!light?"2px 2px 2px white":""}}>
       <div className='headersPart1'>
         <Link to="/">
-      <h4>Sociopedis</h4>
+      <h4>ZolloPedia</h4>
         </Link>
       {/* <TextField
                 fullWidth

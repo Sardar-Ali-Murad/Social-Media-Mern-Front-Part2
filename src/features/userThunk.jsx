@@ -3,6 +3,7 @@ import { getPosts, currentUser, singleUser } from "./userSlice";
 
 // After Deployment
 let BACK_URL="https://social-media-back.vercel.app/"
+// http://localhost:5000
 
 // Before Deployment
 // let BACK_URL="https://social-media-back.vercel.app"
@@ -10,7 +11,7 @@ let BACK_URL="https://social-media-back.vercel.app/"
 export const setupUserLogin = async (data, route, thunkAPI) => {
   try {
     let props = await axios.post(
-      `https://social-media-back.vercel.app/api/v1/auth/${route}`,
+      `http://localhost:5000/api/v1/auth/${route}`,
       data
     );
     return props.data;
@@ -32,26 +33,36 @@ export const setupUserRegister = async (data, route, thunkAPI) => {
 };
 
 export const postImage = async (event, thunkAPI) => {
-  const imageFile = event.target.files[0];
-  const formData = new FormData();
-  formData.append("image", imageFile);
-  let token = thunkAPI.getState().store.token;
-
   try {
-    const props = await axios.post(
-      `https://social-media-back.vercel.app/api/v1/post/uploadImage`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    return props.data;
+    const imageFile = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", imageFile);
+    formData.append("upload_preset", "zkkzikta");
+    let data=await axios.post("http://api.cloudinary.com/v1_1/dvaodl5k8/image/upload",formData)
+    return data
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    thunkAPI.rejectWithValue(error)
   }
+
+
+  // The Below is the code with the Backend
+  // let token = thunkAPI.getState().store.token;
+
+  // try {
+    // const props = await axios.post(
+    //   `https://social-media-back.vercel.app/api/v1/post/uploadImage`,
+    //   formData,
+    //   {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //       authorization: `Bearer ${token}`,
+    //     },
+    //   }
+    // );
+    // return props.data;
+  // } catch (error) {
+  //   return thunkAPI.rejectWithValue(error.response.data.msg);
+  // }
 };
 
 export const getAllPosts = async (_, thunkAPI) => {

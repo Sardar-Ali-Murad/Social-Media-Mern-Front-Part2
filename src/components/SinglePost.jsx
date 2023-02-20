@@ -35,6 +35,15 @@ const SinglePost = ({ post }) => {
     }, 3000);
   }
 
+  const date = new Date(post.createdAt)
+const formattedDate = date.toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric"
+})
+
+
+
   return (
     <Card
       className="post singleCard"
@@ -56,7 +65,7 @@ const SinglePost = ({ post }) => {
           </Link>
           <div>
             <h4>{post.user.firstName}</h4>
-            <p className="date">{moment(post.createdAt).format()}</p>
+            <p className="date">{formattedDate}</p>
           </div>
           {!user.friends.find(
             (singleFriend) => singleFriend._id === post.user._id

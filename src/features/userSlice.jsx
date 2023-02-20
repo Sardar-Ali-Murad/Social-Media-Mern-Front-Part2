@@ -26,6 +26,7 @@ export const setupUserRegisternApi=createAsyncThunk("user/setupUserRegister",asy
 })
 
 
+// This is needed if we are doing this in the backend
 export const uploadImage=createAsyncThunk("user/postImage",async(event,thunkAPI)=>{
     return postImage(event,thunkAPI)
 })
@@ -92,7 +93,6 @@ const userSlice=createSlice({
           state.light=!state.light
           addLightToLocalStorage(state.light)
        }
-
     },
     extraReducers:{
         [setupUserLoginApi.pending]:(state)=>{
@@ -132,17 +132,17 @@ const userSlice=createSlice({
           state.alertText=payload
         },
         [uploadImage.fulfilled]:(state,{payload})=>{
-            state.postImage=payload.image.src
+          console.log(payload)
+            state.postImage=payload.data.secure_url
             state.isLoading=false
         },
         [uploadImage.pending]:(state)=>{
           state.isLoading=true
-  
         },
-        [uploadImage.rejected]:(state,props)=>{
-          console.log(props)
-          state.isLoading=false
-        },
+        // [uploadImage.rejected]:(state,props)=>{
+        //   console.log(props)
+        //   state.isLoading=false
+        // },
         [getPosts.fulfilled]:(state,{payload})=>{
           state.Posts=payload.Posts
           state.isLoading=false
