@@ -38,7 +38,7 @@ export const postImage = async (event, thunkAPI) => {
     const formData = new FormData();
     formData.append("file", imageFile);
     formData.append("upload_preset", "zkkzikta");
-    let data=await axios.post("http://api.cloudinary.com/v1_1/dvaodl5k8/image/upload",formData)
+    let data=await axios.post("https://api.cloudinary.com/v1_1/dvaodl5k8/image/upload",formData)
     return data
   } catch (error) {
     thunkAPI.rejectWithValue(error)
